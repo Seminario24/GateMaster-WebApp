@@ -1,0 +1,26 @@
+.about-section {
+    padding: 2rem;
+    background-color: #282828;
+  }
+  
+  .about-section h2 {
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+  }
+  
+  .quotes-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .quote-card {
+    background-color: #2e2e2e;
+    padding: 1rem;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    width: 150px;
+    text-align: center;
+    color: #ffffff;
+  }
+  
