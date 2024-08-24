@@ -1,7 +1,7 @@
 import './gateMasterLogin.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext'; // Importa el contexto de autenticación
+import { useAuth } from '../../context/AuthContext'; 
 
 export default function GateMasterLogin() {
   const navigate = useNavigate();

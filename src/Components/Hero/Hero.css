@@ -1,17 +1,60 @@
 .hero {
-    text-align: center;
-    padding: 2rem;
-    background-color: #282828;
-    color: #ffffff;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #1a1a1a, #333333);
+  color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #00bcd4; /* Un color cyan brillante */
+  background: linear-gradient(135deg, #00bcd4, #00ff72);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin: 0.75rem 0;
+  color: #f0f0f0;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .hero p {
-    font-size: 1.25rem;
-    margin: 0.5rem 0;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
