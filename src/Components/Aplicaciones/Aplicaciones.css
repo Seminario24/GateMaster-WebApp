@@ -1,0 +1,148 @@
+/* Estilo general */
+.aplicaciones-container {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: 'Inter', Arial, sans-serif;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Más espacio para las tarjetas */
+    gap: 30px;
+}
+
+/* Tarjetas de aplicaciones */
+.app-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Título y descripción */
+.app-title {
+    font-size: 1.5rem;
+    color: #0073e6;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.app-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+/* Contenedor de botones */
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Botones */
+button {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button {
+    background-color: #0073e6; /* Azul para editar */
+}
+
+.edit-button:hover {
+    background-color: #005bb5;
+}
+
+.delete-button {
+    background-color: #ff4d4d; /* Rojo para eliminar */
+}
+
+.delete-button:hover {
+    background-color: #e03e3e;
+}
+
+.add-button {
+    background-color: #4caf50; /* Verde para agregar */
+}
+
+.add-button:hover {
+    background-color: #388e3c;
+}
+
+/* Estilo para la sección de agregar nueva aplicación */
+.add-new {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-new input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.add-new input:focus {
+    border-color: #0073e6; /* Cambia el borde al hacer foco */
+}
+
+.add-new button {
+    background-color: #00acc1;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.add-new button:hover {
+    background-color: #00796b;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

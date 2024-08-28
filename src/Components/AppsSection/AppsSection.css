@@ -1,14 +1,14 @@
 .apps-section {
   padding: 3rem;
-  background-color: #2a2a2a;
+  background-color: #f9f9f9; /* Fondo claro */
   border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
   transition: background-color 0.3s ease;
 }
 
 .apps-section h2 {
   margin-bottom: 2rem;
-  color: #00bcd4;
+  color: #333333; /* Texto oscuro */
   text-align: center;
   font-size: 2.5rem;
   text-transform: uppercase;
@@ -17,7 +17,7 @@
 }
 
 .apps-section h2:hover {
-  color: #00ff72;
+  color: #0073e6; /* Cambio de color al hover, más sutil */
 }
 
 .apps-grid {
@@ -27,32 +27,32 @@
 }
 
 .app-card {
-  background-color: #333333;
+  background-color: #ffffff; /* Fondo blanco */
   padding: 1.5rem;
   border-radius: 12px;
   text-align: center;
-  color: #e0e0e0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #444444; /* Texto más oscuro para buen contraste */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más ligera */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .app-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Sombra más definida en hover */
 }
 
 .app-card h3 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
-  color: #ffffff;
+  color: #0073e6; /* Azul claro para los títulos */
   transition: color 0.3s ease;
 }
 
 .app-card p {
   font-size: 1rem;
-  color: #b0b0b0;
+  color: #666666; /* Texto gris para mejor legibilidad */
 }
 
 .app-card:hover h3 {
-  color: #00bcd4;
+  color: #005bb5; /* Azul más oscuro en hover */
 }

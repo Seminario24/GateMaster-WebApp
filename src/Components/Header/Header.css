@@ -3,13 +3,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #2c2c2c;
+  background-color: #ffffff; /* Fondo claro */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .header:hover {
-  background-color: #1f1f1f;
+  background-color: #f0f0f0; /* Cambio sutil en hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -51,7 +51,7 @@
 
 .header nav ul li a {
   text-decoration: none;
-  color: #ffffff;
+  color: #333333; /* Texto oscuro */
   font-weight: 500;
   font-size: 1.3rem;
   padding: 0.5rem;
@@ -61,8 +61,8 @@
 }
 
 .header nav ul li a:hover {
-  color: #00bcd4;
-  background-color: #2a2a2a;
+  color: #0073e6; /* Azul vibrante en hover */
+  background-color: #e6f7ff; /* Fondo azul claro en hover */
   transform: translateY(-2px);
 }
 
@@ -85,35 +85,35 @@
 
 .header .auth-buttons .sign-in {
   background-color: transparent;
-  border: 1px solid #ffffff;
-  color: #ffffff;
+  border: 1px solid #0073e6; /* Borde azul vibrante */
+  color: #0073e6; /* Texto azul */
 }
 
 .header .auth-buttons .sign-in:hover {
-  background-color: #ffffff;
-  color: #2c2c2c;
+  background-color: #0073e6;
+  color: #ffffff; /* Texto blanco en hover */
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header .auth-buttons .register {
-  background-color: #9faee3;
+  background-color: #4caf50; /* Verde para registrar */
   color: #ffffff;
 }
 
 .header .auth-buttons .register:hover {
-  background-color: #00a2ba;
+  background-color: #388e3c; /* Verde más oscuro en hover */
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header .auth-buttons .logout {
-  background-color: #ff4d4d;
+  background-color: #f44336; /* Rojo brillante para logout */
   color: #ffffff;
 }
 
 .header .auth-buttons .logout:hover {
-  background-color: #e03e3e;
+  background-color: #d32f2f; /* Rojo más oscuro en hover */
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

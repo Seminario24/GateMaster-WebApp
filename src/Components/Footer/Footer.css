@@ -1,13 +1,19 @@
 .footer {
-    padding: 1rem;
-    background-color: #1f1f1f;
-    color: #ffffff;
-    text-align: center;
-  }
-  
-  .footer .social-icons span {
-    margin: 0 0.5rem;
-    cursor: pointer;
-    color: #ffffff;
-  }
-  
+  padding: 1rem;
+  background-color: #f1f1f1; /* Fondo claro */
+  color: #333333; /* Texto oscuro para buen contraste */
+  text-align: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidad */
+  border-top: 1px solid #dddddd; /* Línea superior para separación visual */
+}
+
+.footer .social-icons span {
+  margin: 0 0.5rem;
+  cursor: pointer;
+  color: #0073e6; /* Color azul vibrante para iconos sociales */
+  transition: color 0.3s ease;
+}
+
+.footer .social-icons span:hover {
+  color: #005bb5; /* Azul más oscuro en hover para efecto interactivo */
+}

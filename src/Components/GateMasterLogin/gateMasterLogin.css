@@ -5,7 +5,7 @@
   justify-content: center;
   height: 95vh;
   padding: 20px;
-  background-color: #1e1e1e; /* Fondo oscuro elegante */
+  background-color: #f4f4f4; /* Fondo claro */
 }
 
 .login-content {
@@ -22,19 +22,19 @@
 .login-header h1 {
   font-size: 24px;
   font-weight: bold;
-  color: #ffffff; /* Texto en blanco puro */
+  color: #333333; /* Texto en gris oscuro */
 }
 
 .login-header p {
-  color: #b0b0b0; /* Texto en gris claro */
+  color: #666666; /* Texto en gris medio */
 }
 
 /* Card styles */
 .login-card {
-  background-color: #2a2a2a; /* Fondo de tarjeta oscuro */
+  background-color: #ffffff; /* Fondo de tarjeta blanco */
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0px 0px 15px 2px rgba(0, 255, 170, 0.6); /* Sombra de neón verde azulado */
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
 /* Button styles */
@@ -45,18 +45,18 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  color: #000000;
+  color: #ffffff; /* Texto en blanco */
   margin-bottom: 15px;
-  background-color: #00ffaa; /* Fondo del botón en neón verde azulado */
-  text-shadow: 0px 0px 8px rgba(0, 255, 170, 0.2); /* Efecto de neón */
+  background-color: #007bff; /* Azul corporativo */
+  transition: background-color 0.3s ease;
 }
 
 .google-button {
-  background-color: #2666ce; /* Azul característico de Google */
+  background-color: #db4437; /* Rojo característico de Google */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: whitesmoke;
+  color: #ffffff; /* Texto en blanco */
 }
 
 .google-button .icon {
@@ -64,7 +64,7 @@
 }
 
 .login-button:hover {
-  opacity: 0.9;
+  background-color: #0056b3; /* Azul más oscuro en hover */
 }
 
 /* Divider styles */
@@ -75,16 +75,16 @@
 }
 
 .divider span {
-  background-color: #2a2a2a; /* Fondo oscuro para el texto del divisor */
+  background-color: #ffffff; /* Fondo blanco para el texto del divisor */
   padding: 0 10px;
-  color: #b0b0b0; /* Texto en gris claro */
+  color: #666666; /* Texto en gris medio */
 }
 
 .divider:before, .divider:after {
   content: '';
   flex: 1;
   height: 1px;
-  background-color: #444444; /* Línea divisora gris oscuro */
+  background-color: #dddddd; /* Línea divisora gris claro */
 }
 
 /* Form styles */
@@ -100,7 +100,7 @@
 label {
   margin-bottom: 5px;
   display: block;
-  color: #b0b0b0; /* Color del texto de las etiquetas */
+  color: #333333; /* Color del texto de las etiquetas */
 }
 
 input {
@@ -108,18 +108,18 @@ input {
   padding: 10px;
   font-size: 15px;
   border-radius: 4px;
-  border: 1px solid #444444; /* Borde oscuro */
-  background-color: #333333; /* Fondo de input oscuro */
-  color: #f7f7f7; /* Texto claro */
+  border: 1px solid #cccccc; /* Borde claro */
+  background-color: #ffffff; /* Fondo de input blanco */
+  color: #333333; /* Texto oscuro */
 }
 
 input:focus {
-  border-color: #00ffaa; /* Borde en neón verde azulado al enfocar */
+  border-color: #007bff; /* Borde azul corporativo al enfocar */
   outline: none;
 }
 
 input::placeholder {
-  color: #7d7d7d; /* Placeholder en gris medio */
+  color: #999999; /* Placeholder en gris claro */
 }
 
 /* Responsive styles */

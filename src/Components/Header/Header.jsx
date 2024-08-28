@@ -13,6 +13,18 @@ const Header = () => {
     navigate('/landingpage'); // Navega a la página de aterrizaje
   };
 
+  const goToAplicaciones = () => {
+    navigate('/aplicaciones'); // Navega a la página de aplicaciones
+  };
+
+  const goToPermisos = () => {
+    navigate('/permisos'); // Navega a la página de permisos
+  };
+
+  const goToAboutUs = () => {
+    navigate('/aboutus'); // Navega a la página de About Us
+  };
+
   return (
     <header className="header">
       <div className="logo" onClick={goToLandingPage} style={{ cursor: 'pointer' }}> 
@@ -20,9 +32,9 @@ const Header = () => {
       </div>
       <nav>
         <ul>
-          <li><a href="#apps">Apps</a></li>   
-          <li><a href="/permisos" onClick={(e) => { e.preventDefault(); navigate('/permisos'); }}>Permisos</a></li> {/* Navega a /permisos */}
-          <li><a href="#about">Acerca de Nosotros</a></li>
+          <li><a href="/aplicaciones" onClick={(e) => { e.preventDefault(); goToAplicaciones(); }}>Apps</a></li>   
+          <li><a href="/permisos" onClick={(e) => { e.preventDefault(); goToPermisos(); }}>Permisos</a></li>
+          <li><a href="/aboutus" onClick={(e) => { e.preventDefault(); goToAboutUs(); }}>Acerca de Nosotros</a></li> {/* Ajuste para navegar a About Us */}
         </ul>
       </nav>
       <div className="auth-buttons">
