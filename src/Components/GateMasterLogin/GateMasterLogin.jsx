@@ -1,7 +1,9 @@
 import './gateMasterLogin.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext'; 
+import { useAuth } from '../../context/AuthContext';
+import axios from 'axios';
+
 
 // TODO Iconos e imagenes
 import { FcGoogle } from 'react-icons/fc';
@@ -15,10 +17,10 @@ export default function GateMasterLogin() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
     const email = event.target.email.value;
     const password = event.target.password.value;
 
+    /*
     // Datos quemados para validación
     const validEmail = 'Fake@123.com';
     const validPassword = '1234';
@@ -35,19 +37,15 @@ export default function GateMasterLogin() {
       login();
       navigate('/landingpage');
     }
+    */
 
     // TODO: Espacio de trabajo para la integración con el backend
     // Aquí es donde se implementará la lógica para hacer la verificación real
     // con el backend. Por ejemplo, podrías hacer una llamada a una API para
     // autenticar al usuario, como se muestra en el ejemplo comentado abajo:
 
-    /*
     try {
-      const response = await fetch('https://tu-backend.com/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await axios.post(`${import.meta.env.VITE_URL_API_BACKEND}/auth/login`, {
         body: JSON.stringify({ email, password }),
       });
 
@@ -61,9 +59,9 @@ export default function GateMasterLogin() {
         setErrorMessage(data.message || 'Correo o contraseña incorrectos');
       }
     } catch (error) {
-      setErrorMessage('Error de conexión. Inténtalo de nuevo más tarde.');
+      setErrorMessage(`Error de conexión: ${error}`);
     }
-    */
+    
   };
 
   return (
@@ -73,7 +71,7 @@ export default function GateMasterLogin() {
           <div className="login-header">
             <h1 className="login-title">Bienvenido a GateMater</h1>
             <p className="login-description">
-              Inicia sesión con tus credenciales para acceder al ERP 2024. Si no tienes acceso, contáctanos en seminario2024@gmail.com.
+              Inicia sesión con tus credenciales. Si no tienes acceso, contáctanos en seminario2024@gmail.com
             </p>
           </div>
           <form className="login-form" onSubmit={handleLogin}>

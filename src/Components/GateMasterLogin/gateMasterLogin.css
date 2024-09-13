@@ -71,7 +71,7 @@
 .input-group .input-icon {
   position: absolute;
   left: 12px; /* Ajusta según el espacio que desees */
-  top: 65%;
+  top: 70%;
   transform: translateY(-50%); /* Centra verticalmente el icono */
   width: 24px;
   height: 24px;
