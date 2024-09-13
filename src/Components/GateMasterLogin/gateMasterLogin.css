@@ -4,7 +4,7 @@
   align-items: center;
   min-height: 100vh;
   background-color: #f4f4f9;
-  padding: 20px; /* Añade un poco de espacio en el borde para móviles */
+  padding: 20px;
 }
 
 .login-content {
@@ -12,35 +12,35 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1000px; /* Aumenta el ancho máximo para pantallas grandes */
+  max-width: 1200px;
 }
 
 .login-card {
   background-color: #fff;
   padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px; /* Establece un ancho máximo para el formulario */
+  max-width: 500px;
 }
 
 .login-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .login-title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   color: #1f2937;
   margin-bottom: 10px;
 }
 
 .login-description {
-  font-size: 14px;
+  font-size: 16px;
   color: #4b5563;
-  text-align: justify;
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .login-form {
@@ -48,7 +48,8 @@
 }
 
 .input-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  position: relative;
 }
 
 .input-group label {
@@ -60,23 +61,34 @@
 
 .input-group input {
   width: 100%;
-  padding: 10px;
+  padding: 12px 12px 12px 40px; /* Espacio para el icono */
   border: 1px solid #d1d5db;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 14px;
+  box-sizing: border-box;
+}
+
+.input-group .input-icon {
+  position: absolute;
+  left: 12px; /* Ajusta según el espacio que desees */
+  top: 65%;
+  transform: translateY(-50%); /* Centra verticalmente el icono */
+  width: 24px;
+  height: 24px;
+  color: #6b7280; /* Color del icono */
 }
 
 .login-button {
   width: 100%;
-  padding: 12px;
-  font-size: 16px;
+  padding: 14px;
+  font-size: 18px;
   font-weight: 600;
   background-color: #121d30;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-top: 10px;
   transition: background-color 0.3s ease;
 }
 
@@ -93,7 +105,7 @@
   font-size: 16px;
   border: 1px solid #d1d5db;
   padding: 14px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -103,39 +115,24 @@
 }
 
 .google-button .icon {
-  margin-right: 8px;
+  margin-right: 10px;
   font-size: 20px;
 }
 
 .error-message {
-  color: #d9534f; /* Color rojo elegante */
+  color: #d9534f;
   font-size: 14px;
-  margin: 5px 0; /* Espacio arriba y abajo */
-  padding: 0; /* Eliminar padding si es necesario */
-  text-align: left; /* Alinea el texto a la izquierda si el input es de ancho completo */
+  margin: 5px 0;
+  padding: 0;
+  text-align: left;
 }
-
-/* Asegúrate de que el espacio entre el input y el error-message sea mínimo */
-.input-group {
-  margin-bottom: 0; /* Elimina el margen inferior si es necesario */
-}
-
-.input-group .error-message {
-  margin-top: 2px; /* Espacio justo debajo del input */
-}
-
-/* Ajusta el margen entre el error-message y el botón */
-.login-button {
-  margin-top: 10px; /* Espacio superior para separar del error-message */
-}
-
 
 .divider {
   text-align: center;
   color: #6b7280;
-  margin: 20px 0; /* Ajusta el espacio superior e inferior del divisor */
+  margin: 30px 0;
   position: relative;
-  width: 100%; /* Asegura que el divisor ocupe todo el ancho del contenedor */
+  width: 100%;
 }
 
 .divider:before,
@@ -146,7 +143,7 @@
   background-color: #d1d5db;
   position: absolute;
   top: 50%;
-  width: 45%; /* Ajusta el ancho de las líneas antes y después del texto */
+  width: 45%;
 }
 
 .divider:before {
@@ -158,10 +155,10 @@
 }
 
 .divider span {
-  background-color: #fff; /* Asegura que el texto esté en un fondo blanco */
-  padding: 0 10px; /* Espacio alrededor del texto */
+  background-color: #fff;
+  padding: 0 15px;
   position: relative;
-  z-index: 1; /* Asegura que el texto esté sobre las líneas */
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
@@ -171,11 +168,15 @@
   }
 
   .login-title {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .login-description {
-    font-size: 12px;
+    font-size: 14px;
+  }
+
+  .input-group {
+    margin-bottom: 10px;
   }
 
   .input-group label {
@@ -184,17 +185,17 @@
 
   .input-group input {
     font-size: 12px;
-    padding: 8px;
+    padding: 10px 10px 10px 36px;
   }
 
   .login-button {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 16px;
+    padding: 12px;
   }
 
   .google-button {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 16px;
+    padding: 12px;
   }
 
   .google-button .icon {
@@ -204,11 +205,15 @@
 
 @media (max-width: 480px) {
   .login-title {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .login-description {
-    font-size: 11px;
+    font-size: 12px;
+  }
+
+  .input-group {
+    margin-bottom: 8px;
   }
 
   .input-group label {
@@ -217,17 +222,17 @@
 
   .input-group input {
     font-size: 11px;
-    padding: 6px;
+    padding: 10px 10px 10px 32px;
   }
 
   .login-button {
-    font-size: 12px;
-    padding: 8px;
+    font-size: 14px;
+    padding: 10px;
   }
 
   .google-button {
-    font-size: 12px;
-    padding: 8px;
+    font-size: 14px;
+    padding: 10px;
   }
 
   .google-button .icon {

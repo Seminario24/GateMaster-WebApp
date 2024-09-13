@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext'; 
 
+// TODO Iconos e imagenes
 import { FcGoogle } from 'react-icons/fc';
+import IconCorreo from '../../../public/icons/correo-electronico.png'
+import IconPassword from '../../../public/icons/candado.png'
 
 export default function GateMasterLogin() {
   const navigate = useNavigate();
@@ -75,12 +78,14 @@ export default function GateMasterLogin() {
           </div>
           <form className="login-form" onSubmit={handleLogin}>
             <div className="input-group">
+              <img src={IconCorreo} alt="Email Icon" className="input-icon" />
               <label htmlFor="email">Correo electrónico</label>
-              <input id="email" type="email" placeholder="you@example.com" required />
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
             </div>
             <div className="input-group">
+              <img src={IconPassword} alt="Password Icon" className="input-icon" />
               <label htmlFor="password">Contraseña</label>
-              <input id="password" type="password" placeholder="********" required />
+              <input id="password" name="password" type="password" placeholder="********" required />
             </div>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             <button type="submit" className="login-button">Iniciar Sesión</button>
