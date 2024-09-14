@@ -1,0 +1,225 @@
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f4f4f4; /* Color de fondo claro para el contenido principal */
+}
+
+.sidebar {
+  position: relative; /* Asegura que el botón de toggle esté posicionado relativo al sidebar */
+  width: 250px;
+  background-color: #2F4B8F;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s, background-color 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 80px; /* Ancho cuando está colapsado */
+  background-color: #1E2A44; /* Color de fondo más oscuro cuando está colapsado */
+}
+
+.toggle-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff; /* Color de fondo del botón */
+  color: #2F4B8F; /* Color del texto del botón */
+  border: none;
+  border-radius: 50%; /* Hacer el botón circular */
+  width: 40px; /* Ancho del botón */
+  height: 40px; /* Alto del botón */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.toggle-button:hover {
+  background-color: #ddd;
+  color: #2F4B8F;
+}
+
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.sidebar-logo img {
+  width: 60px;
+  transition: width 0.3s;
+}
+
+.sidebar.collapsed .sidebar-logo img {
+  width: 40px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 10px 0;
+}
+
+.sidebar-logo {
+  width: 90px;
+  text-align: center;
+}
+
+.sidebar-logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+  background-color: #1E2A44;
+}
+
+.sidebar-logo img {
+  width: 60px;
+  margin-bottom: 20px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.sidebar-menu li {
+  margin: 15px 0;
+}
+
+.sidebar-menu li a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: background-color 0.3s, padding-left 0.3s;
+}
+
+.sidebar-menu li a:hover, .sidebar-menu li a.active {
+  background-color: #1A2C5C;
+  padding-left: 25px;
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 15px;
+  transition: filter 0.3s;
+}
+
+.sidebar-menu li a:hover .menu-icon, .sidebar-menu li a.active .menu-icon {
+  filter: brightness(1.2);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-button {
+  background-color: #E74C3C;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #C0392B;
+  transform: scale(1.05);
+}
+
+.user-table {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #fff; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-table-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f4f4f4; 
+  color: #333;
+}
+
+.status-active {
+  color: #27ae60;
+}
+
+.status-inactive {
+  color: #e74c3c;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido dentro del botón */
+  background-color: #E74C3C;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-button img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px; /* Espacio entre el ícono y el texto */
+}
+
+.logout-button span {
+  display: block;
+}
+
+.logout-button:hover {
+  background-color: #C0392B;
+  transform: scale(1.05);
+}

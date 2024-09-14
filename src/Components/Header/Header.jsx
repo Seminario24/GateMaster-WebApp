@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="logo" onClick={goToLandingPage} style={{ cursor: 'pointer' }}> 
-        <img src={logo} alt="Logo" /> 
+        <img src={logo} alt="Logo umg" /> 
       </div>
       <nav>
         <ul>

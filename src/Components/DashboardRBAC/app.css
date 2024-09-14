@@ -1,0 +1,13 @@
+.app-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px; /* O el ancho que desees para tu sidebar */
+  height: 100vh; /* Asegúrate de que el sidebar ocupe toda la altura de la ventana */
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+}

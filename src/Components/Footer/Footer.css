@@ -1,19 +1,57 @@
-.footer {
-  padding: 1rem;
-  background-color: #f1f1f1; /* Fondo claro */
-  color: #333333; /* Texto oscuro para buen contraste */
-  text-align: center;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidad */
-  border-top: 1px solid #dddddd; /* Línea superior para separación visual */
+footer {
+  margin-top: auto;
+  background-color: #1b263b;
+  color: #ffffff;
+  padding: 30px 0;
+  font-family: 'Roboto', sans-serif;
 }
 
-.footer .social-icons span {
-  margin: 0 0.5rem;
-  cursor: pointer;
-  color: #0073e6; /* Color azul vibrante para iconos sociales */
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer .space-x-4 {
+  display: flex;
+  gap: 20px;
+}
+
+footer a {
   transition: color 0.3s ease;
+  text-decoration: none;
 }
 
-.footer .social-icons span:hover {
-  color: #005bb5; /* Azul más oscuro en hover para efecto interactivo */
+footer a:hover {
+  color: #9ca3af; 
+}
+
+footer svg {
+  margin-left: 10px;
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  transition: transform 0.3s ease; 
+  color: white;
+}
+
+footer a:hover svg {
+  transform: scale(1.2); 
+}
+
+footer .text-sm {
+  margin-right: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  footer .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  footer .text-sm {
+    margin-top: 20px;
+  }
 }
