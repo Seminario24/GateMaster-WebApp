@@ -20,7 +20,7 @@ export default function GateMasterLogin() {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    /*
+    
     // Datos quemados para validación
     const validEmail = 'Fake@123.com';
     const validPassword = '1234';
@@ -35,9 +35,8 @@ export default function GateMasterLogin() {
     } else {
       setErrorMessage(''); // Limpia el mensaje de error
       login();
-      navigate('/landingpage');
+      navigate('/dashboard');
     }
-    */
 
     // TODO: Espacio de trabajo para la integración con el backend
     // Aquí es donde se implementará la lógica para hacer la verificación real
