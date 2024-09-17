@@ -9,8 +9,8 @@ const Header = () => {
     window.location.href = 'http://localhost:5173/';
   };
 
-  const goToLandingPage = () => {
-    navigate('/landingpage'); // Navega a la página de aterrizaje
+  const goToHome = () => {
+    navigate('/'); // Navega a la ruta raíz (landing page)
   };
 
   const goToAplicaciones = () => {
@@ -25,20 +25,24 @@ const Header = () => {
     navigate('/aboutus'); // Navega a la página de About Us
   };
 
+  const goToLogin = () => {
+    navigate('/login'); // Navega a la página de login
+  };
+
   return (
     <header className="header">
-      <div className="logo" onClick={goToLandingPage} style={{ cursor: 'pointer' }}> 
+      <div className="logo" onClick={goToHome} style={{ cursor: 'pointer' }}> 
         <img src={logo} alt="Logo umg" /> 
       </div>
       <nav>
         <ul>
           <li><a href="/aplicaciones" onClick={(e) => { e.preventDefault(); goToAplicaciones(); }}>Apps</a></li>   
           <li><a href="/permisos" onClick={(e) => { e.preventDefault(); goToPermisos(); }}>Permisos</a></li>
-          <li><a href="/aboutus" onClick={(e) => { e.preventDefault(); goToAboutUs(); }}>Acerca de Nosotros</a></li> {/* Ajuste para navegar a About Us */}
+          <li><a href="/aboutus" onClick={(e) => { e.preventDefault(); goToAboutUs(); }}>Acerca de Nosotros</a></li>
         </ul>
       </nav>
       <div className="auth-buttons">
-        <button className="sign-in">Sign in</button>
+        <button className="sign-in" onClick={goToLogin}>Sign in</button>
         <button className="register">Register</button>
         <button className="logout" onClick={handleLogout}>Salir</button>
       </div>

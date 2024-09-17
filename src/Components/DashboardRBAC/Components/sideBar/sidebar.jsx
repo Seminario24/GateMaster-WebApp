@@ -19,7 +19,14 @@ function Sidebar() {
   };
 
   const handleLogout = () => {
-    navigate('/');
+    // Eliminar los tokens del localStorage
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('username');
+
+    // Redirigir a la página de login o landing page
+    navigate('/login');
   };
 
   return (
