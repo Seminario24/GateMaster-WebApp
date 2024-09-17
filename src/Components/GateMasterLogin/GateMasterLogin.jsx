@@ -1,18 +1,13 @@
 import './gateMasterLogin.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
-
-
-// TODO Iconos e imagenes
 import { FcGoogle } from 'react-icons/fc';
-import IconCorreo from '../../../public/icons/correo-electronico.png'
-import IconPassword from '../../../public/icons/candado.png'
+import IconCorreo from '../../../public/icons/correo-electronico.png';
+import IconPassword from '../../../public/icons/candado.png';
 
 export default function GateMasterLogin() {
   const navigate = useNavigate();
-  const { login } = useAuth(); // Usa el contexto de autenticación
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = async (event) => {
@@ -20,47 +15,25 @@ export default function GateMasterLogin() {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    
-    // Datos quemados para validación
-    const validEmail = 'Fake@123.com';
-    const validPassword = '1234';
-
-    // Validación con datos quemados (mientras se conecta con el backend)
-    if (email !== validEmail && password !== validPassword) {
-      setErrorMessage('Correo electrónico y contraseña incorrectos');
-    } else if (email !== validEmail) {
-      setErrorMessage('Correo electrónico incorrecto');
-    } else if (password !== validPassword) {
-      setErrorMessage('Contraseña incorrecta');
-    } else {
-      setErrorMessage(''); // Limpia el mensaje de error
-      login();
-      navigate('/dashboard');
-    }
-
-    // TODO: Espacio de trabajo para la integración con el backend
-    // Aquí es donde se implementará la lógica para hacer la verificación real
-    // con el backend. Por ejemplo, podrías hacer una llamada a una API para
-    // autenticar al usuario, como se muestra en el ejemplo comentado abajo:
-
     try {
-      const response = await axios.post(`${import.meta.env.VITE_URL_API_BACKEND}/auth/login`, {
-        body: JSON.stringify({ email, password }),
+      // Enviar credenciales al backend
+      const response = await axios.post('http://localhost:8081/api/auth/login', {
+        username: email,
+        password: password,
       });
 
-      const data = await response.json();
+      const { accessToken, refreshToken } = response.data;
 
-      if (data.success) {
-        login(); // Marca al usuario como autenticado
-        navigate('/landingpage');
-      } else {
-        // Muestra el mensaje de error recibido desde el backend
-        setErrorMessage(data.message || 'Correo o contraseña incorrectos');
-      }
+      // Guardar los tokens en el localStorage
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+
+      // Redirigir al dashboard
+      navigate('/dashboard');
     } catch (error) {
-      setErrorMessage(`Error de conexión: ${error}`);
+      // Manejar errores de autenticación o conexión
+      setErrorMessage('Correo o contraseña incorrectos');
     }
-    
   };
 
   return (
@@ -97,5 +70,5 @@ export default function GateMasterLogin() {
         </div>
       </div>
     </div>
-  )
+  );
 }

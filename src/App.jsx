@@ -15,22 +15,28 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<GateMasterLogin />} />
+          {/* Ruta pública para LandingPage */}
           <Route 
-            path="/landingpage" 
+            path="/" 
             element={
-              <PrivateRoute>
-                <Layout> {/* Usa el Layout para envolver la página */}
-                  <LandingPage />
-                </Layout>
-              </PrivateRoute>
+              <Layout>
+                <LandingPage />
+              </Layout>
             } 
           />
+          
+          {/* Ruta pública para el Login */}
+          <Route 
+            path="/login" 
+            element={<GateMasterLogin />} 
+          />
+
+          {/* Rutas protegidas */}
           <Route 
             path="/permisos" 
             element={
               <PrivateRoute>
-                <Layout> {/* Usa el Layout para envolver la página */}
+                <Layout>
                   <Permisos />
                 </Layout>
               </PrivateRoute>
@@ -40,7 +46,7 @@ function App() {
             path="/aplicaciones" 
             element={
               <PrivateRoute>
-                <Layout> {/* Usa el Layout para envolver la página */}
+                <Layout>
                   <Aplicaciones />
                 </Layout>
               </PrivateRoute>
@@ -57,7 +63,7 @@ function App() {
             } 
           />
           
-          {/* Ruta principal de la App */}
+          {/* Ruta protegida para el Dashboard */}
           <Route 
             path="/dashboard" 
             element={
