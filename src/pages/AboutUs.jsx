@@ -1,5 +1,4 @@
-import AboutProject from "../Components/AboutProject/AboutProject";
-
+import AboutProject from "../Components/HomePage/AboutProject/AboutProject";
 
 const AboutUs = () => {
   return (

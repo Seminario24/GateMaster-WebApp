@@ -1,7 +1,6 @@
-
-import Hero from '../Components/Hero/Hero';
-import AppsSection from '../Components/AppsSection/AppsSection';
-import AboutSection from '../Components/AboutSection/AboutSection';
+import Hero from '../Components/HomePage/Hero/Hero';
+import AppsSection from '../Components/HomePage/AppsSection/AppsSection';
+import AboutSection from '../Components/HomePage/AboutSection/AboutSection';
 
 const LandingPage = () => {
   return (
