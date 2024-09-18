@@ -42,8 +42,8 @@ const Header = () => {
         </ul>
       </nav>
       <div className="auth-buttons">
-        <button className="sign-in" onClick={goToLogin}>Sign in</button>
-        <button className="register">Register</button>
+        <button className="sign-in" onClick={goToLogin}>Ingresar</button>
+        <button className="register">Registrarme</button>
         <button className="logout" onClick={handleLogout}>Salir</button>
       </div>
     </header>
