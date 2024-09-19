@@ -8,7 +8,8 @@ import AboutUs from './pages/AboutUs';
 import PrivateRoute from './routes/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 import Layout from './Components/Layout/Layout';
-import Dashboard from './Components/DashboardRBAC/Dashboard'
+import Dashboard from './Components/DashboardRBAC/Dashboard';
+import CrearUsuarios from "./Components/DashboardRBAC/Components/CrearUsuarios/CrearUsuarios";
 
 function App() {
   return (
@@ -35,25 +36,41 @@ function App() {
           <Route 
             path="/permisos" 
             element={
+              <PrivateRoute>
                 <Layout>
                   <Permisos />
                 </Layout>
-            } 
+              </PrivateRoute>
+            }   
+          />
+          <Route
+            path="/CrearUsuarios"
+            element={
+              <PrivateRoute>
+                <Layout>
+                  <CrearUsuarios />
+                </Layout>
+              </PrivateRoute>
+            }
           />
           <Route 
             path="/aplicaciones" 
             element={
+              <PrivateRoute>
                 <Layout>
                   <Aplicaciones />
                 </Layout>
+              </PrivateRoute>
             } 
           />
           <Route 
             path="/aboutus" 
             element={
+              <PrivateRoute>
                 <Layout> 
                   <AboutUs />
                 </Layout>
+              </PrivateRoute>
             } 
           />
           
