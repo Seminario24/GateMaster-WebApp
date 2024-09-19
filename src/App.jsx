@@ -24,8 +24,6 @@ function App() {
                 <LandingPage />
               </Layout>
             } 
-
-          
           />
           
           {/* Ruta pública para el Login */}
@@ -44,8 +42,8 @@ function App() {
                 </Layout>
               </PrivateRoute>
             }   
-            />
-             <Route
+          />
+          <Route
             path="/CrearUsuarios"
             element={
               <PrivateRoute>
@@ -54,10 +52,6 @@ function App() {
                 </Layout>
               </PrivateRoute>
             }
-        
-   
-         
-
           />
           <Route 
             path="/aplicaciones" 
