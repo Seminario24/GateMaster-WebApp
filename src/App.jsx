@@ -8,7 +8,8 @@ import AboutUs from './pages/AboutUs';
 import PrivateRoute from './routes/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 import Layout from './Components/Layout/Layout';
-import Dashboard from './Components/DashboardRBAC/Dashboard'
+import Dashboard from './Components/DashboardRBAC/Dashboard';
+import CrearUsuarios from "./Components/DashboardRBAC/Components/CrearUsuarios/CrearUsuarios";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
                 <LandingPage />
               </Layout>
             } 
+
+          
           />
           
           {/* Ruta pública para el Login */}
@@ -40,7 +43,21 @@ function App() {
                   <Permisos />
                 </Layout>
               </PrivateRoute>
-            } 
+            }   
+            />
+             <Route
+            path="/CrearUsuarios"
+            element={
+              <PrivateRoute>
+                <Layout>
+                  <CrearUsuarios />
+                </Layout>
+              </PrivateRoute>
+            }
+        
+   
+         
+
           />
           <Route 
             path="/aplicaciones" 

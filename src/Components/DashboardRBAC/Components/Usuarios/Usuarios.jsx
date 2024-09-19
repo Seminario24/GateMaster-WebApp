@@ -5,7 +5,7 @@ import DeleteIcon from '../../../../../public/icons/borrar.png';
 import AddIcon from '../../../../../public/icons/agregar.png';
 import SearchIcon from '../../../../../public/icons/buscar.png';
 import SuspendIcon from '../../../../../public/icons/suspendido.png'; // Ícono de suspensión
-
+import { useNavigate } from 'react-router-dom';
 const UserTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [users, setUsers] = useState([
@@ -23,9 +23,11 @@ const UserTable = () => {
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+
+  const navigate = useNavigate();
   const handleAddUser = () => {
-    // Lógica para agregar un nuevo usuario
-    console.log("Usuario agregado");
+    navigate('/CrearUsuarios'); 
+    
   };
 
   const handleEditUser = (id) => {
