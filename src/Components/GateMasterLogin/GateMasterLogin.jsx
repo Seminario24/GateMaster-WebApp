@@ -15,9 +15,11 @@ export default function GateMasterLogin() {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     try {
       // Enviar credenciales al backend
-      const response = await axios.post('http://localhost:8081/api/auth/login', {
+      const response = await axios.post(`${apiUrl}auth/login`, {
         username: email,
         password: password,
       });
@@ -32,6 +34,7 @@ export default function GateMasterLogin() {
       navigate('/dashboard');
     } catch (error) {
       // Manejar errores de autenticación o conexión
+      console.log(error)
       setErrorMessage('Correo o contraseña incorrectos');
     }
   };

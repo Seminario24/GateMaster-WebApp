@@ -26,7 +26,7 @@ function Sidebar() {
     localStorage.removeItem('username');
 
     // Redirigir a la página de login o landing page
-    navigate('/login');
+    navigate('/');
   };
 
   return (

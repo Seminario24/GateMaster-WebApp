@@ -35,31 +35,25 @@ function App() {
           <Route 
             path="/permisos" 
             element={
-              <PrivateRoute>
                 <Layout>
                   <Permisos />
                 </Layout>
-              </PrivateRoute>
             } 
           />
           <Route 
             path="/aplicaciones" 
             element={
-              <PrivateRoute>
                 <Layout>
                   <Aplicaciones />
                 </Layout>
-              </PrivateRoute>
             } 
           />
           <Route 
             path="/aboutus" 
             element={
-              <PrivateRoute>
                 <Layout> 
                   <AboutUs />
                 </Layout>
-              </PrivateRoute>
             } 
           />
           

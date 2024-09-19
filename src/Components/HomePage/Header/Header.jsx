@@ -1,32 +1,28 @@
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../Assets/UMGm1.png'; // Importa la imagen desde Assets
+import logo from '../../../assets/UMGm1.png'; // Importa la imagen desde Assets
 
 const Header = () => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    window.location.href = 'http://localhost:5173/';
-  };
-
   const goToHome = () => {
-    navigate('/'); // Navega a la ruta raíz (landing page)
+    navigate('/');
   };
 
   const goToAplicaciones = () => {
-    navigate('/aplicaciones'); // Navega a la página de aplicaciones
+    navigate('/aplicaciones');
   };
 
   const goToPermisos = () => {
-    navigate('/permisos'); // Navega a la página de permisos
+    navigate('/permisos');
   };
 
   const goToAboutUs = () => {
-    navigate('/aboutus'); // Navega a la página de About Us
+    navigate('/aboutus');
   };
 
   const goToLogin = () => {
-    navigate('/login'); // Navega a la página de login
+    navigate('/login');
   };
 
   return (
@@ -42,9 +38,8 @@ const Header = () => {
         </ul>
       </nav>
       <div className="auth-buttons">
-        <button className="sign-in" onClick={goToLogin}>Sign in</button>
-        <button className="register">Register</button>
-        <button className="logout" onClick={handleLogout}>Salir</button>
+        <button className="register">Registrarme</button>
+        <button className="sign-in" onClick={goToLogin}>Ingresar</button>
       </div>
     </header>
   );

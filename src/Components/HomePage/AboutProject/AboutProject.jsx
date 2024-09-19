@@ -1,4 +1,3 @@
-
 import './AboutProject.css';
 
 const AboutProject = () => {
