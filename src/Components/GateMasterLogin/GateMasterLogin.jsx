@@ -24,6 +24,9 @@ export default function GateMasterLogin() {
 
       const { accessToken, refreshToken } = response.data;
 
+
+   
+
       // Guardar los tokens en el localStorage
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
@@ -50,12 +53,12 @@ export default function GateMasterLogin() {
             <div className="input-group">
               <img src={IconCorreo} alt="Email Icon" className="input-icon" />
               <label htmlFor="email">Correo electrónico</label>
-              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+              <input id="email" name="email" type="text" placeholder="you@example.com" required />
             </div>
             <div className="input-group">
               <img src={IconPassword} alt="Password Icon" className="input-icon" />
               <label htmlFor="password">Contraseña</label>
-              <input id="password" name="password" type="password" placeholder="********" required />
+              <input id="password" name="password" type="password" placeholder="" required />
             </div>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             <button type="submit" className="login-button">Iniciar Sesión</button>

@@ -1,5 +1,4 @@
-
-import Aplicaciones from '../Components/Aplicaciones/Aplicaciones';
+import Aplicaciones from '../Components/HomePage/Aplicaciones/Aplicaciones';
 
 const AplicacionesPage = () => {
   return (
