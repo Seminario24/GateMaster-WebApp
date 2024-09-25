@@ -15,7 +15,7 @@ const getAccessToken = async () => {
     await axios.get(`${API_URL}/authenticate`, {
       headers: { 'Authorization': `Bearer ${accessToken}` },
     });
-    return accessToken; // Si el accessToken aún es válido, retornarlo
+    return accessToken; // El accessToken aún es válido, retornarlo
   } catch (error) {
     if (error.response && error.response.status === 401) {
       try {
