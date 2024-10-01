@@ -20,11 +20,7 @@ function Sidebar() {
 
   const handleLogout = () => {
     // Eliminar los tokens del localStorage
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('username');
-
+ 
     // Redirigir a la página de login o landing page
     navigate('/');
   };

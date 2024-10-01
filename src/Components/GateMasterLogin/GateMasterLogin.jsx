@@ -12,21 +12,17 @@ export default function GateMasterLogin() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const email = event.target.email.value;
+    const username = event.target.username.value;
     const password = event.target.password.value;
 
     try {
       // Enviar credenciales al backend
       const response = await axios.post('http://localhost:8081/api/auth/login', {
-        username: email,
+        username: username,
         password: password,
       });
 
       const { accessToken, refreshToken } = response.data;
-
-
-   
-
       // Guardar los tokens en el localStorage
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
@@ -52,8 +48,8 @@ export default function GateMasterLogin() {
           <form className="login-form" onSubmit={handleLogin}>
             <div className="input-group">
               <img src={IconCorreo} alt="Email Icon" className="input-icon" />
-              <label htmlFor="email">Correo electrónico</label>
-              <input id="email" name="email" type="text" placeholder="you@example.com" required />
+              <label htmlFor="username">Correo electrónico</label>
+              <input id="username" name="username" type="text" placeholder="" required />
             </div>
             <div className="input-group">
               <img src={IconPassword} alt="Password Icon" className="input-icon" />

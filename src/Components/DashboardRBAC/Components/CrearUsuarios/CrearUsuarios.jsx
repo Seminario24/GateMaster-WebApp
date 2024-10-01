@@ -1,124 +1,118 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-
-const API_URL = 'http://localhost:8081/api/gatemaster'; // URL actualizada
-
-const getAccessToken = async () => {
-  let accessToken = localStorage.getItem('accessToken');
-  const refreshToken = localStorage.getItem('refreshToken');
-
-  if (!accessToken && !refreshToken) {
-    throw new Error('No hay tokens disponibles. Por favor, inicia sesión.');
-  }
-
-  try {
-    await axios.get(`${API_URL}/authenticate`, {
-      headers: { 'Authorization': `Bearer ${accessToken}` },
-    });
-    return accessToken; // El accessToken aún es válido, retornarlo
-  } catch (error) {
-    if (error.response && error.response.status === 401) {
-      try {
-        const response = await axios.post(`${API_URL}/refresh-token`, { token: refreshToken });
-        const { newAccessToken } = response.data;
-        localStorage.setItem('accessToken', newAccessToken);
-        return newAccessToken;
-      } catch (refreshError) {
-        throw new Error('No se pudo renovar el token, por favor inicia sesión nuevamente.');
-      }
-    }
-    throw new Error('Error al verificar o renovar el token.');
-  }
-};
-
-const createUser = async (userData) => {
-  const accessToken = await getAccessToken(); // Obtener (o renovar) el token antes de la solicitud
-
-  try {
-    const response = await axios.post(`${API_URL}/createuser`, userData, {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`, // Asegúrate de que el token se incluya aquí
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error al crear el usuario:", error); // Muestra el error en la consola
-    throw new Error('Error al crear el usuario');
-  }
-};
-
-const CrearUsuarios = () => {
+import './usuariosvista.css';
+const CreateUser = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [password, setPassword] = useState(''); // Campo para la contraseña
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    
-    const userData = {
-      username,
-      email,
-      firstName,
-      lastName,
-    };
+  const createUser = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      setMessage('Token no encontrado, por favor inicia sesión.');
+      return;
+    }
 
     try {
-      const result = await createUser(userData);
-      console.log("Usuario creado exitosamente:", result);
-      // Aquí puedes redirigir o mostrar un mensaje de éxito
+      // Primer paso: Crear usuario
+      await axios.post(
+        'http://localhost:8081/api/gatemaster/createuser',
+        {
+          username,
+          email,
+          firstName,
+          lastName,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      // Segundo paso: Obtener el ID del usuario creado
+      const userResponse = await axios.post(
+        'http://localhost:8081/api/gatemaster/getuser',
+        {
+          username,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      const userId = userResponse.data.id; // Asumimos que devuelve el 'id'
+      console.log('Usuario creado con ID:', userId);
+
+      // Tercer paso: Establecer la contraseña del usuario
+      const passwordResponse = await axios.post(
+        'http://localhost:8081/api/gatemaster/setuserpassword',
+        {
+          id: userId,
+          password, // La contraseña ingresada
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      // Mensaje de éxito si todo sale bien
+      setMessage('Usuario y contraseña creados exitosamente');
+      console.log('Contraseña establecida:', passwordResponse.data);
+      
     } catch (error) {
-      setErrorMessage(error.message);
+      console.error('Error:', error.response ? error.response.data : error.message);
+      setMessage('Error: ' + (error.response ? error.response.data : error.message));
     }
   };
 
   return (
     <div>
       <h2>Crear Usuario</h2>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nombre de usuario:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Correo electrónico:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Nombre:</label>
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Apellido:</label>
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Crear Usuario</button>
-      </form>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="First Name"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Last Name"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)} // Campo para la contraseña
+      />
+      <button onClick={createUser}>Crear Usuario</button>
+      {message && <p>{message}</p>}
     </div>
   );
 };
 
-export default CrearUsuarios;
+export default CreateUser;
