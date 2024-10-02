@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './usuariosvista.css';
 const CreateUser = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
