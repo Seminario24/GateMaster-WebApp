@@ -11,6 +11,7 @@ import axios from 'axios';
 const UserTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [users, setUsers] = useState([]);
+  const [userStatus, setUserStatus] = useState({}); // Estado para los estados de usuario
 
   // Obtener usuarios del backend
   useEffect(() => {
@@ -25,14 +26,28 @@ const UserTable = () => {
             }
           });
 
-          // Filtrar los campos necesarios: username, email, status
+          // Filtrar los campos necesarios: username, email
           const filteredUsers = response.data.map(user => ({
-            username: user.username,  // Asegúrate de que "username" exista en el objeto devuelto por el backend
+            username: user.username,
             email: user.email,
-            status: user.status
           }));
 
           setUsers(filteredUsers); // Actualizar el estado de los usuarios
+
+          // Obtener el estado de todos los usuarios
+          const statusResponse = await axios.get('http://localhost:8081/api/gatemaster/getallusersstatus', {
+            headers: {
+              'Authorization': `Bearer ${accessToken}`
+            }
+          });
+
+          // Guardar los estados en un objeto
+          const statusData = {};
+          statusResponse.data.forEach(user => {
+            statusData[user.username] = user.status; // Mapa de username a status
+          });
+
+          setUserStatus(statusData); // Actualizar el estado con los estados de los usuarios
         } catch (error) {
           console.error('Error al obtener los usuarios:', error);
         }
@@ -67,13 +82,64 @@ const UserTable = () => {
     setUsers(users.filter(user => user.username !== username));
   };
 
-  const handleToggleSuspendUser = (username) => {
-    // Lógica para alternar entre suspender y reactivar a un usuario
-    setUsers(users.map(user =>
-      user.username === username
-        ? { ...user, status: user.status === 'suspended' ? 'active' : 'suspended' }
-        : user
-    ));
+  const handleToggleSuspendUser = async (username) => {
+    const accessToken = localStorage.getItem('accessToken'); // Obtener token
+
+    if (accessToken) {
+      try {
+        console.log("Deshabilitando usuario:", username); // Imprimir el nombre de usuario
+        const response = await axios.put('http://localhost:8081/api/gatemaster/disableuser', {
+          username: username
+        }, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        console.log(response.data); // Mensaje de éxito del backend
+
+        // Actualizar el estado del usuario
+        setUserStatus(prevStatus => ({
+          ...prevStatus,
+          [username]: 'suspended' // Cambiar el estado a "suspendido"
+        }));
+      } catch (error) {
+        console.error('Error al deshabilitar al usuario:', error);
+      }
+    } else {
+      console.error('Token no encontrado en el localStorage');
+    }
+  };
+
+  const handleToggleEnableUser = async (username) => {
+    const accessToken = localStorage.getItem('accessToken'); // Obtener token
+
+    if (accessToken) {
+      try {
+        console.log("Habilitando usuario:", username); // Imprimir el nombre de usuario
+        const response = await axios.put('http://localhost:8081/api/gatemaster/enableuser', {
+          username: username
+        }, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        console.log(response.data); // Mensaje de éxito del backend
+
+        // Actualizar el estado del usuario
+        setUserStatus(prevStatus => ({
+          ...prevStatus,
+          [username]: 'active' // Cambiar el estado a "activo"
+        }));
+      } catch (error) {
+        console.error('Error al habilitar al usuario:', error);
+      }
+    } else {
+      console.error('Token no encontrado en el localStorage');
+    }
   };
 
   return (
@@ -106,20 +172,25 @@ const UserTable = () => {
           <div className="user-table-row" key={user.username}>
             <span>{user.username}</span>
             <span>{user.email}</span>
-            <span className={
-              user.status === 'active' ? 'status-active' :
-              user.status === 'suspended' ? 'status-suspended' :
-              'status-inactive'}>
-              {user.status === 'active' ? 'Activo' : user.status === 'suspended' ? 'Suspendido' : 'Inactivo'}
+            <span className={userStatus[user.username] === 'active' ? 'status-active' : 'status-suspended'}>
+              {userStatus[user.username] === 'active' ? 'Activo' : 'Suspendido'}
             </span>
             <span className="user-actions">
               <img src={EditIcon} alt="Editar" onClick={() => handleEditUser(user.username)} />
               <img src={DeleteIcon} alt="Eliminar" onClick={() => handleDeleteUser(user.username)} />
-              <img
-                src={SuspendIcon}
-                alt={user.status === 'suspended' ? "Reactivar" : "Suspender"}
-                onClick={() => handleToggleSuspendUser(user.username)}
-              />
+              {userStatus[user.username] === 'suspended' ? (
+                <img
+                  src={SuspendIcon}
+                  alt="Reactivar"
+                  onClick={() => handleToggleEnableUser(user.username)} // Cambia el estado a habilitar
+                />
+              ) : (
+                <img
+                  src={SuspendIcon}
+                  alt="Suspender"
+                  onClick={() => handleToggleSuspendUser(user.username)} // Cambia el estado a suspender
+                />
+              )}
             </span>
           </div>
         ))}
