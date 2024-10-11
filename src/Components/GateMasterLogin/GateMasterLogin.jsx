@@ -12,20 +12,17 @@ export default function GateMasterLogin() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const email = event.target.email.value;
+    const username = event.target.username.value;
     const password = event.target.password.value;
-
-    const apiUrl = import.meta.env.VITE_API_URL;
 
     try {
       // Enviar credenciales al backend
-      const response = await axios.post(`${apiUrl}auth/login`, {
-        username: email,
+      const response = await axios.post('http://localhost:8081/api/auth/login', {
+        username: username,
         password: password,
       });
 
       const { accessToken, refreshToken } = response.data;
-
       // Guardar los tokens en el localStorage
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
@@ -34,7 +31,6 @@ export default function GateMasterLogin() {
       navigate('/dashboard');
     } catch (error) {
       // Manejar errores de autenticación o conexión
-      console.log(error)
       setErrorMessage('Correo o contraseña incorrectos');
     }
   };
@@ -52,13 +48,13 @@ export default function GateMasterLogin() {
           <form className="login-form" onSubmit={handleLogin}>
             <div className="input-group">
               <img src={IconCorreo} alt="Email Icon" className="input-icon" />
-              <label htmlFor="email">Correo electrónico</label>
-              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+              <label htmlFor="username">Correo electrónico</label>
+              <input id="username" name="username" type="text" placeholder="" required />
             </div>
             <div className="input-group">
               <img src={IconPassword} alt="Password Icon" className="input-icon" />
               <label htmlFor="password">Contraseña</label>
-              <input id="password" name="password" type="password" placeholder="********" required />
+              <input id="password" name="password" type="password" placeholder="" required />
             </div>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             <button type="submit" className="login-button">Iniciar Sesión</button>
