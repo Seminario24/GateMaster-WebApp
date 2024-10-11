@@ -1,145 +1,133 @@
-import { useState } from "react";
-// Importamos axios
+
+import { useState } from 'react';
 import axios from 'axios';
-const CrearUsuario = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    firstName: '',
-    lastName: '',
-    password: ''
-  });
+import './usuariosvista.css'; // Asegúrate de importar el archivo CSS
 
-  const [responseMessage, setResponseMessage] = useState('');
+const CreateUser = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState(''); // Campo para la contraseña
+  const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false); // Estado para éxito
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const createUser = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      setMessage('Token no encontrado, por favor inicia sesión.');
+      return;
+    }
 
     try {
-      // Recuperar el token del localStorage
-      const token = localStorage.getItem('authToken');
-      
-      // 1. Llamada al primer servicio: Crear usuario
-      const createUserResponse = await axios.post('http://localhost:8081/api/gatemaster/createUser', {
-        username: formData.username,
-        email: formData.email,
-        firstName: formData.firstName,
-        lastName: formData.lastName
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}` // Añadimos el token en los headers
-        }
-      });
-
-      if (createUserResponse.status === 201) {
-        // 2. Llamada al segundo servicio: Conseguir usuario
-        const getUserResponse = await axios.post('http://localhost:8081/api/gatemaster/getuser', {
-          username: formData.username
-        }, {
+      // Primer paso: Crear usuario
+      await axios.post(
+        'http://localhost:8081/api/gatemaster/createuser',
+        {
+          username,
+          email,
+          firstName,
+          lastName,
+        },
+        {
           headers: {
-            'Authorization': `Bearer ${token}` // Añadimos el token en los headers
-          }
-        });
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
-        const userData = getUserResponse.data; // Capturamos los datos del usuario
-        const userId = userData.id; // Capturamos el ID del usuario
+      // Segundo paso: Obtener el ID del usuario creado
+      const userResponse = await axios.post(
+        'http://localhost:8081/api/gatemaster/getuser',
+        {
+          username,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
-        // 3. Llamada al tercer servicio: Asignar contraseña
-        const setPasswordResponse = await axios.post('http://localhost:8081/api/gatemaster/setuserpassword', {
+      const userId = userResponse.data.id; // Asumimos que devuelve el 'id'
+      console.log('Usuario creado con ID:', userId);
+
+      // Tercer paso: Establecer la contraseña del usuario
+      const passwordResponse = await axios.post(
+        'http://localhost:8081/api/gatemaster/setuserpassword',
+        {
           id: userId,
-          password: formData.password
-        }, {
+          password, // La contraseña ingresada
+        },
+        {
           headers: {
-            'Authorization': `Bearer ${token}` // Añadimos el token en los headers
-          }
-        });
-
-        if (setPasswordResponse.status === 200) {
-          setResponseMessage('Usuario creado y contraseña asignada correctamente.');
-        } else {
-          setResponseMessage('Error al asignar la contraseña.');
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
         }
-      } else {
-        setResponseMessage('Error al crear el usuario.');
-      }
+      );
+
+      // Mensaje de éxito si todo sale bien
+      setMessage('Usuario y contraseña creados exitosamente');
+      setIsSuccess(true); // Establece el estado de éxito a verdadero
+      console.log('Contraseña establecida:', passwordResponse.data);
+      
     } catch (error) {
-      setResponseMessage('Error en la solicitud: ' + error.message);
+      console.error('Error:', error.response ? error.response.data : error.message);
+      setMessage('Error: ' + (error.response ? error.response.data : error.message));
+      setIsSuccess(false); // Restablecer el estado de éxito en caso de error
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
+    <div className="create-account-container">
+      <h2>Crear Usuario</h2>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="First Name"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Last Name"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)} // Campo para la contraseña
+      />
+      <button onClick={createUser}>Crear Usuario</button>
+
+      {/* Mostrar mensaje de éxito con ícono de check */}
+      {isSuccess && (
+        <div className="success-message">
+          <i className="fas fa-check-circle"></i> {/* Ícono Font Awesome */}
+          <p>{message}</p>
         </div>
+      )}
 
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label>First Name:</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Last Name:</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit">Submit</button>
-      </form>
-
-      {responseMessage && <p>{responseMessage}</p>}
+      {/* Mostrar solo el mensaje de error si no es éxito */}
+      {!isSuccess && message && <p>{message}</p>}
     </div>
   );
 };
 
-export default CrearUsuario;
-
+export default CreateUser;
