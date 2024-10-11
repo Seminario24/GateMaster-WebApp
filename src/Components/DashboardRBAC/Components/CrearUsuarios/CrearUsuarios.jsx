@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './usuariosvista.css';
+import './Users.css'; // Asegúrate de importar el archivo CSS
+
 const CreateUser = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ const CreateUser = () => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState(''); // Campo para la contraseña
   const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false); // Estado para éxito
 
   const createUser = async () => {
     const accessToken = localStorage.getItem('accessToken');
@@ -68,16 +70,18 @@ const CreateUser = () => {
 
       // Mensaje de éxito si todo sale bien
       setMessage('Usuario y contraseña creados exitosamente');
+      setIsSuccess(true); // Establece el estado de éxito a verdadero
       console.log('Contraseña establecida:', passwordResponse.data);
       
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);
       setMessage('Error: ' + (error.response ? error.response.data : error.message));
+      setIsSuccess(false); // Restablecer el estado de éxito en caso de error
     }
   };
 
   return (
-    <div>
+    <div className="create-account-container">
       <h2>Crear Usuario</h2>
       <input
         type="text"
@@ -110,7 +114,17 @@ const CreateUser = () => {
         onChange={(e) => setPassword(e.target.value)} // Campo para la contraseña
       />
       <button onClick={createUser}>Crear Usuario</button>
-      {message && <p>{message}</p>}
+
+      {/* Mostrar mensaje de éxito con ícono de check */}
+      {isSuccess && (
+        <div className="success-message">
+          <i className="fas fa-check-circle"></i> {/* Ícono Font Awesome */}
+          <p>{message}</p>
+        </div>
+      )}
+
+      {/* Mostrar solo el mensaje de error si no es éxito */}
+      {!isSuccess && message && <p>{message}</p>}
     </div>
   );
 };
