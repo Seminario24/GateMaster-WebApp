@@ -1,17 +1,18 @@
 .create-account-container {
-  background: linear-gradient(135deg, #a855f7, #c6bed1);
-  border-radius: 15px;
+  background-color: #fff; /* Cambiar el fondo a blanco */
+  border-radius: 8px; /* Menos bordes redondeados */
   padding: 30px;
   width: 350px;
   margin: 0 auto;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
-  color: #fff;
+  color: #333; /* Texto oscuro */
 }
 
 .create-account-container h2 {
   font-size: 24px;
   margin-bottom: 20px;
+  color: #333; /* Color del título coherente con el dashboard */
 }
 
 .create-account-container input {
@@ -19,7 +20,7 @@
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border-radius: 10px;
+  border-radius: 5px; /* Bordes menos redondeados */
   border: 1px solid #ddd;
   font-size: 14px;
   box-sizing: border-box;
@@ -31,7 +32,7 @@
   background-color: #3b82f6;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px; /* Menos redondeado */
   cursor: pointer;
   font-size: 16px;
 }
@@ -45,17 +46,33 @@
   color: #71f87c;
   font-size: 14px;
 }
+
 .success-message {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 15px;
-  color: #4ade80; /* Color verde para éxito */
+  color: #4ade80;
   font-size: 16px;
 }
 
 .success-message i {
   margin-right: 10px;
-  font-size: 20px; /* Tamaño del ícono */
+  font-size: 20px;
 }
 
+.back-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #f43f5e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.back-button:hover {
+  background-color: #e11d48;
+}

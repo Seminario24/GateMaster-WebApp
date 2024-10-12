@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './sidebar.css';
 
-// TODO Iconos a utilizar
+// Iconos a utilizar
 import UmgLogo from '../../../../assets/UMGm1.png';
 import User from '../../../../../public/icons/user.png';
 import Settings from '../../../../../public/icons/settings.png';
@@ -20,9 +20,10 @@ function Sidebar() {
 
   const handleLogout = () => {
     // Eliminar los tokens del localStorage
- 
-    // Redirigir a la página de login o landing page
-    navigate('/');
+    localStorage.removeItem('accessToken'); // Elimina el token de autenticación (ajústalo si tienes otro tipo de token)
+
+    // Redirigir a la URL externa (http://localhost:5173/)
+    window.location.href = 'http://localhost:5173/';
   };
 
   return (

@@ -1,6 +1,6 @@
-
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate para la navegación
 import './usuariosvista.css'; // Asegúrate de importar el archivo CSS
 
 const CreateUser = () => {
@@ -11,6 +11,7 @@ const CreateUser = () => {
   const [password, setPassword] = useState(''); // Campo para la contraseña
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false); // Estado para éxito
+  const navigate = useNavigate(); // Hook para navegación
 
   const createUser = async () => {
     const accessToken = localStorage.getItem('accessToken');
@@ -81,6 +82,11 @@ const CreateUser = () => {
     }
   };
 
+  // Función para regresar al dashboard
+  const goToDashboard = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <div className="create-account-container">
       <h2>Crear Usuario</h2>
@@ -115,6 +121,10 @@ const CreateUser = () => {
         onChange={(e) => setPassword(e.target.value)} // Campo para la contraseña
       />
       <button onClick={createUser}>Crear Usuario</button>
+
+      <button onClick={goToDashboard} className="back-button">
+        Regresar al Dashboard
+      </button>
 
       {/* Mostrar mensaje de éxito con ícono de check */}
       {isSuccess && (

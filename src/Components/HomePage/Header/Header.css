@@ -117,3 +117,18 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+
+.auth-buttons .logout {
+  padding: 10px 20px;
+  background-color: #f43f5e; /* Color rojo para logout */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.auth-buttons .logout:hover {
+  background-color: #e11d48; /* Un tono más oscuro al hacer hover */
+}
