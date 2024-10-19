@@ -18,8 +18,8 @@ export default function GateMasterLogin() {
     const password = event.target.password.value;
 
     try {
-      // Enviar credenciales al backend
       const response = await axios.post(`${apiUrl}/auth/login`, {
+
         username: username,
         password: password,
       });

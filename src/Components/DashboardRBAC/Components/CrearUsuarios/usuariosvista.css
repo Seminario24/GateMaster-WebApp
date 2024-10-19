@@ -1,61 +1,32 @@
-.create-account-container {
-  background: linear-gradient(135deg, #a855f7, #c6bed1);
-  border-radius: 15px;
-  padding: 30px;
-  width: 350px;
+.App {
+  max-width: 600px;
   margin: 0 auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  color: #fff;
+  padding: 20px;
 }
 
-.create-account-container h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
+form {
+  margin-bottom: 30px;
 }
 
-.create-account-container input {
+input {
   display: block;
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  font-size: 14px;
-  box-sizing: border-box;
 }
 
-.create-account-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: #3b82f6;
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 10px;
   cursor: pointer;
-  font-size: 16px;
 }
 
 .create-account-container button:hover {
   background-color: #2563eb;
 }
 
-.create-account-container p {
-  margin-top: 15px;
-  color: #71f87c;
-  font-size: 14px;
+h2 {
+  margin-bottom: 15px;
 }
-.success-message {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 15px;
-  color: #4ade80; /* Color verde para éxito */
-  font-size: 16px;
-}
-
-.success-message i {
-  margin-right: 10px;
-  font-size: 20px; /* Tamaño del ícono */
-}
-

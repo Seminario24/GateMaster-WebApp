@@ -1,39 +1,41 @@
-
-import { useState } from 'react';
+import { useState } from "react";
+// Importamos axios
 import axios from 'axios';
-import './usuariosvista.css'; // Asegúrate de importar el archivo CSS
+const CrearUsuario = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: ''
+  });
 
-const CreateUser = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [password, setPassword] = useState(''); // Campo para la contraseña
-  const [message, setMessage] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false); // Estado para éxito
+  const [responseMessage, setResponseMessage] = useState('');
 
-  const createUser = async () => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (!accessToken) {
-      setMessage('Token no encontrado, por favor inicia sesión.');
-      return;
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
-      // Primer paso: Crear usuario
-      await axios.post(
-        'http://localhost:8081/api/gatemaster/createuser',
-        {
-          username,
-          email,
-          firstName,
-          lastName,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-          },
+      // Recuperar el token del localStorage
+      const token = localStorage.getItem('authToken');
+      
+      // 1. Llamada al primer servicio: Crear usuario
+      const createUserResponse = await axios.post('http://localhost:8081/api/gatemaster/createUser', {
+        username: formData.username,
+        email: formData.email,
+        firstName: formData.firstName,
+        lastName: formData.lastName
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}` // Añadimos el token en los headers
         }
       );
 
@@ -63,69 +65,85 @@ const CreateUser = () => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+            'Authorization': `Bearer ${token}` // Añadimos el token en los headers
+          }
+        });
 
-      // Mensaje de éxito si todo sale bien
-      setMessage('Usuario y contraseña creados exitosamente');
-      setIsSuccess(true); // Establece el estado de éxito a verdadero
-      console.log('Contraseña establecida:', passwordResponse.data);
-      
+        if (setPasswordResponse.status === 200) {
+          setResponseMessage('Usuario creado y contraseña asignada correctamente.');
+        } else {
+          setResponseMessage('Error al asignar la contraseña.');
+        }
+      } else {
+        setResponseMessage('Error al crear el usuario.');
+      }
     } catch (error) {
-      console.error('Error:', error.response ? error.response.data : error.message);
-      setMessage('Error: ' + (error.response ? error.response.data : error.message));
-      setIsSuccess(false); // Restablecer el estado de éxito en caso de error
+      setResponseMessage('Error en la solicitud: ' + error.message);
     }
   };
 
   return (
-    <div className="create-account-container">
-      <h2>Crear Usuario</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="First Name"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Last Name"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)} // Campo para la contraseña
-      />
-      <button onClick={createUser}>Crear Usuario</button>
-
-      {/* Mostrar mensaje de éxito con ícono de check */}
-      {isSuccess && (
-        <div className="success-message">
-          <i className="fas fa-check-circle"></i> {/* Ícono Font Awesome */}
-          <p>{message}</p>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Username:</label>
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
         </div>
-      )}
 
-      {/* Mostrar solo el mensaje de error si no es éxito */}
-      {!isSuccess && message && <p>{message}</p>}
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>First Name:</label>
+          <input
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Last Name:</label>
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+
+      {responseMessage && <p>{responseMessage}</p>}
     </div>
   );
 };
