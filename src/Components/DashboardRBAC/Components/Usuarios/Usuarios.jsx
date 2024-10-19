@@ -8,6 +8,8 @@ import SuspendIcon from '../../../../../public/icons/suspendido.png'; // Ícono 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const UserTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [users, setUsers] = useState([]);
@@ -20,7 +22,7 @@ const UserTable = () => {
 
       if (accessToken) {
         try {
-          const response = await axios.get('http://localhost:8081/api/gatemaster/getallusers', {
+          const response = await axios.get(`${apiUrl}/gatemaster/getallusers`, {
             headers: {
               'Authorization': `Bearer ${accessToken}`
             }
@@ -35,7 +37,7 @@ const UserTable = () => {
           setUsers(filteredUsers); // Actualizar el estado de los usuarios
 
           // Obtener el estado de todos los usuarios
-          const statusResponse = await axios.get('http://localhost:8081/api/gatemaster/getallusersstatus', {
+          const statusResponse = await axios.get(`${apiUrl}/gatemaster/getallusersstatus`, {
             headers: {
               'Authorization': `Bearer ${accessToken}`
             }
@@ -88,7 +90,7 @@ const UserTable = () => {
     if (accessToken) {
       try {
         console.log("Deshabilitando usuario:", username); // Imprimir el nombre de usuario
-        const response = await axios.put('http://localhost:8081/api/gatemaster/disableuser', {
+        const response = await axios.put(`${apiUrl}/gatemaster/disableuser`, {
           username: username
         }, {
           headers: {
@@ -118,7 +120,7 @@ const UserTable = () => {
     if (accessToken) {
       try {
         console.log("Habilitando usuario:", username); // Imprimir el nombre de usuario
-        const response = await axios.put('http://localhost:8081/api/gatemaster/enableuser', {
+        const response = await axios.put(`${apiUrl}/gatemaster/enableuser`, {
           username: username
         }, {
           headers: {
