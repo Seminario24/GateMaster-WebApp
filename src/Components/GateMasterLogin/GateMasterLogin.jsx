@@ -6,6 +6,8 @@ import { FcGoogle } from 'react-icons/fc';
 import IconCorreo from '../../../public/icons/correo-electronico.png';
 import IconPassword from '../../../public/icons/candado.png';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function GateMasterLogin() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
@@ -17,7 +19,7 @@ export default function GateMasterLogin() {
 
     try {
       // Enviar credenciales al backend
-      const response = await axios.post('http://localhost:8081/api/auth/login', {
+      const response = await axios.post(`${apiUrl}/auth/login`, {
         username: username,
         password: password,
       });
@@ -29,8 +31,9 @@ export default function GateMasterLogin() {
 
       // Redirigir al dashboard
       navigate('/dashboard');
-    } catch (error) {
+    } catch (e) {
       // Manejar errores de autenticación o conexión
+      console.log(e)
       setErrorMessage('Correo o contraseña incorrectos');
     }
   };
