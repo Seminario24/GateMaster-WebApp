@@ -16,8 +16,8 @@ export default function GateMasterLogin() {
     const password = event.target.password.value;
 
     try {
-      // Enviar credenciales al backend
-      const response = await axios.post('http://localhost:8081/api/auth/login', {
+      // Enviar credenciales al backend utilizando la URL del .env
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/auth/login`, {
         username: username,
         password: password,
       });

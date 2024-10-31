@@ -1,6 +1,6 @@
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../../assets/UMGm1.png'; // Importa la imagen desde Assets
+import logo from '../../../Assets/UMGm1.png'; // Importa la imagen desde Assets
 import { useEffect, useState } from 'react';
 
 const Header = () => {

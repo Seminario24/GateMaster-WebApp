@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './sidebar.css';
 
 // Iconos a utilizar
-import UmgLogo from '../../../../assets/UMGm1.png';
+import UmgLogo from '../../../../Assets/UMGm1.png';
 import User from '../../../../../public/icons/user.png';
 import Settings from '../../../../../public/icons/settings.png';
 import Home from '../../../../../public/icons/home.png';
@@ -11,6 +11,7 @@ import Rol from '../../../../../public/icons/roles.png';
 import Sesion from '../../../../../public/icons/cerrar-sesion.png';
 
 function Sidebar() {
+  
   const [isExpanded, setIsExpanded] = useState(true);
   const navigate = useNavigate(); // Hook para redirección
 
@@ -23,7 +24,7 @@ function Sidebar() {
     localStorage.removeItem('accessToken'); // Elimina el token de autenticación (ajústalo si tienes otro tipo de token)
 
     // Redirigir a la URL externa (http://localhost:5173/)
-    window.location.href = 'http://localhost:5173/';
+    window.location.href = import.meta.env.VITE_APP_ENDPOINT;
   };
 
   return (
