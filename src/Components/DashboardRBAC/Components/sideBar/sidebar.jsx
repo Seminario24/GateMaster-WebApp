@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './sidebar.css';
 
 // Iconos a utilizar
-import UmgLogo from '../../../../assets/UMGm1.png';
+import UmgLogo from '../../../../Assets/UMGm1.png';
 import User from '../../../../../public/icons/user.png';
 import Settings from '../../../../../public/icons/settings.png';
 import Home from '../../../../../public/icons/home.png';
