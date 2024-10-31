@@ -11,6 +11,7 @@ import Rol from '../../../../../public/icons/roles.png';
 import Sesion from '../../../../../public/icons/cerrar-sesion.png';
 
 function Sidebar() {
+  
   const [isExpanded, setIsExpanded] = useState(true);
   const navigate = useNavigate(); // Hook para redirección
 
