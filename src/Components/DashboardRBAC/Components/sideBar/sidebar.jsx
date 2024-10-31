@@ -23,7 +23,7 @@ function Sidebar() {
     localStorage.removeItem('accessToken'); // Elimina el token de autenticación (ajústalo si tienes otro tipo de token)
 
     // Redirigir a la URL externa (http://localhost:5173/)
-    window.location.href = 'http://localhost:5173/';
+    window.location.href = import.meta.env.VITE_APP_ENDPOINT;
   };
 
   return (

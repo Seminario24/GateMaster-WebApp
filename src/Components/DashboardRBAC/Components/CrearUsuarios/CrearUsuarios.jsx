@@ -23,7 +23,7 @@ const CreateUser = () => {
     try {
       // Primer paso: Crear usuario
       await axios.post(
-        'http://localhost:8081/api/gatemaster/createuser',
+        `${import.meta.env.VITE_APP_API_URL}/gatemaster/createuser`,
         {
           username,
           email,
@@ -40,7 +40,7 @@ const CreateUser = () => {
 
       // Segundo paso: Obtener el ID del usuario creado
       const userResponse = await axios.post(
-        'http://localhost:8081/api/gatemaster/getuser',
+        `${import.meta.env.VITE_APP_API_URL}/gatemaster/getuser`,
         {
           username,
         },
@@ -57,7 +57,7 @@ const CreateUser = () => {
 
       // Tercer paso: Establecer la contraseña del usuario
       const passwordResponse = await axios.post(
-        'http://localhost:8081/api/gatemaster/setuserpassword',
+        `${import.meta.env.VITE_APP_API_URL}/gatemaster/setuserpassword`,
         {
           id: userId,
           password, // La contraseña ingresada

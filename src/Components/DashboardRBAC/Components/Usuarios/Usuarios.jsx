@@ -20,7 +20,7 @@ const UserTable = () => {
 
       if (accessToken) {
         try {
-          const response = await axios.get('http://localhost:8081/api/gatemaster/getallusers', {
+          const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/gatemaster/getallusers`, {
             headers: {
               'Authorization': `Bearer ${accessToken}`
             }
@@ -35,7 +35,7 @@ const UserTable = () => {
           setUsers(filteredUsers); // Actualizar el estado de los usuarios
 
           // Obtener el estado de todos los usuarios
-          const statusResponse = await axios.get('http://localhost:8081/api/gatemaster/getallusersstatus', {
+          const statusResponse = await axios.get(`${import.meta.env.VITE_APP_API_URL}/gatemaster/getallusersstatus`, {
             headers: {
               'Authorization': `Bearer ${accessToken}`
             }
@@ -88,7 +88,7 @@ const UserTable = () => {
     if (accessToken) {
       try {
         console.log("Deshabilitando usuario:", username); // Imprimir el nombre de usuario
-        const response = await axios.put('http://localhost:8081/api/gatemaster/disableuser', {
+        const response = await axios.put(`${import.meta.env.VITE_APP_API_URL}/gatemaster/disableuser`, {
           username: username
         }, {
           headers: {
@@ -118,7 +118,7 @@ const UserTable = () => {
     if (accessToken) {
       try {
         console.log("Habilitando usuario:", username); // Imprimir el nombre de usuario
-        const response = await axios.put('http://localhost:8081/api/gatemaster/enableuser', {
+        const response = await axios.put(`${import.meta.env.VITE_APP_API_URL}/gatemaster/enableuser`, {
           username: username
         }, {
           headers: {
