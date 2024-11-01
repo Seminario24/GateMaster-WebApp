@@ -10,13 +10,13 @@ import { AuthProvider } from './context/AuthContext';
 import Layout from './Components/Layout/Layout';
 import Dashboard from './Components/DashboardRBAC/Dashboard';
 import CrearUsuarios from "./Components/DashboardRBAC/Components/CrearUsuarios/CrearUsuarios";
+import Roles from './Components/DashboardRBAC/Components/Roles/Roles'; 
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          {/* Ruta pública para LandingPage */}
           <Route 
             path="/" 
             element={
@@ -25,8 +25,6 @@ function App() {
               </Layout>
             } 
           />
-          
-          {/* Ruta pública para el Login */}
           <Route 
             path="/login" 
             element={<GateMasterLogin />} 
@@ -73,13 +71,23 @@ function App() {
               </PrivateRoute>
             } 
           />
-          
-          {/* Ruta protegida para el Dashboard */}
           <Route 
             path="/dashboard" 
             element={
               <PrivateRoute>
                 <Dashboard />
+              </PrivateRoute>
+            } 
+          />
+          
+          {/* Nueva Ruta Protegida para Roles */}
+          <Route 
+            path="/roles" 
+            element={
+              <PrivateRoute>
+                <Layout>
+                  <Roles />
+                </Layout>
               </PrivateRoute>
             } 
           />
