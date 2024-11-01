@@ -8,6 +8,7 @@ import Settings from '../../../../../public/icons/settings.png';
 import Home from '../../../../../public/icons/home.png';
 import Rol from '../../../../../public/icons/roles.png';
 import Sesion from '../../../../../public/icons/cerrar-sesion.png';
+import AppsIcon from '../../../../../public/icons/roles.png'; // Asegúrate de tener el ícono para Apps
 
 function Sidebar() {
   
@@ -19,10 +20,7 @@ function Sidebar() {
   };
 
   const handleLogout = () => {
-    // Elimina el token de autenticación
     localStorage.removeItem('accessToken');
-
-    // Redirige a la URL de cierre de sesión
     window.location.href = import.meta.env.VITE_APP_ENDPOINT;
   };
 
@@ -36,7 +34,7 @@ function Sidebar() {
       </div>
       <ul className="sidebar-menu">
         <li>
-          <Link to="/dashboard" className="sidebar-link"> {/* Redirección a /dashboard */}
+          <Link to="/dashboard" className="sidebar-link">
             <img src={Home} alt="Inicio" className="menu-icon" />
             {isExpanded && <span>Inicio</span>}
           </Link>
@@ -59,7 +57,16 @@ function Sidebar() {
             {isExpanded && <span>Ajustes</span>}
           </Link>
         </li>
+        
+        {/* Botón para ir a la sección de Apps, justo debajo de Ajustes */}
+        <li>
+          <Link to="/apps" className="sidebar-link">
+            <img src={AppsIcon} alt="Apps" className="menu-icon" />
+            {isExpanded && <span>Apps</span>}
+          </Link>
+        </li>
       </ul>
+
       <div className="sidebar-footer">
         <button className="logout-button" onClick={handleLogout}>
           <img src={Sesion} alt="Logout" className="menu-icon" />

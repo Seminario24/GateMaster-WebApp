@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'; // Importa PropTypes para la validación
+import PropTypes from 'prop-types'; 
 import Header from '../HomePage/Header/Header'; 
 import Footer from '../HomePage/Footer/Footer'; 
 

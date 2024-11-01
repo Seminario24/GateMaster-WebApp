@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Sidebar from '../sideBar/sidebar'; 
 import './apps.css';
 
 const Apps = () => {
@@ -31,70 +32,73 @@ const Apps = () => {
   };
 
   return (
-    <div className="apps-container">
-      <h2 className="apps-title">Gestión de Aplicaciones</h2>
-      <div className="apps-search-create">
-        <input
-          type="text"
-          placeholder="Buscar por nombre de app"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="apps-search"
-        />
-        <button onClick={() => setIsCreating(!isCreating)} className="apps-create-button">
-          + Crear App
-        </button>
-      </div>
-      
-      {isCreating && (
-        <div className="apps-create-form">
-          <h3>Agregar Nueva App</h3>
+    <div className="apps-management-container">
+      <Sidebar /> 
+      <div className="apps-content">
+        <h2 className="apps-title">Gestión de Aplicaciones</h2>
+        <div className="apps-search-create">
           <input
             type="text"
-            name="name"
-            placeholder="Nombre de la App"
-            value={newApp.name}
-            onChange={handleInputChange}
+            placeholder="Buscar por nombre de app"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="apps-search"
           />
-          <input
-            type="text"
-            name="description"
-            placeholder="Descripción"
-            value={newApp.description}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="version"
-            placeholder="Versión"
-            value={newApp.version}
-            onChange={handleInputChange}
-          />
-          <div className="apps-create-actions">
-            <button onClick={handleCreateApp} className="save-button">Guardar</button>
-            <button onClick={() => setIsCreating(false)} className="cancel-button">Cancelar</button>
-          </div>
+          <button onClick={() => setIsCreating(!isCreating)} className="apps-create-button">
+            + Crear App
+          </button>
         </div>
-      )}
+        
+        {isCreating && (
+          <div className="apps-create-form">
+            <h3>Agregar Nueva App</h3>
+            <input
+              type="text"
+              name="name"
+              placeholder="Nombre de la App"
+              value={newApp.name}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              name="description"
+              placeholder="Descripción"
+              value={newApp.description}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              name="version"
+              placeholder="Versión"
+              value={newApp.version}
+              onChange={handleInputChange}
+            />
+            <div className="apps-create-actions">
+              <button onClick={handleCreateApp} className="save-button">Guardar</button>
+              <button onClick={() => setIsCreating(false)} className="cancel-button">Cancelar</button>
+            </div>
+          </div>
+        )}
 
-      <table className="apps-table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Versión</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredApps.map((app) => (
-            <tr key={app.id}>
-              <td>{app.name}</td>
-              <td>{app.description}</td>
-              <td>{app.version}</td>
+        <table className="apps-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Versión</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredApps.map((app) => (
+              <tr key={app.id}>
+                <td>{app.name}</td>
+                <td>{app.description}</td>
+                <td>{app.version}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
