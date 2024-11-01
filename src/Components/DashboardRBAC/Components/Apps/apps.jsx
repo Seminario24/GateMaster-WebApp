@@ -44,38 +44,40 @@ const Apps = () => {
             onChange={handleSearchChange}
             className="apps-search"
           />
-          <button onClick={() => setIsCreating(!isCreating)} className="apps-create-button">
+          <button onClick={() => setIsCreating(true)} className="apps-create-button">
             + Crear App
           </button>
         </div>
         
         {isCreating && (
-          <div className="apps-create-form">
-            <h3>Agregar Nueva App</h3>
-            <input
-              type="text"
-              name="name"
-              placeholder="Nombre de la App"
-              value={newApp.name}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name="description"
-              placeholder="Descripción"
-              value={newApp.description}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name="version"
-              placeholder="Versión"
-              value={newApp.version}
-              onChange={handleInputChange}
-            />
-            <div className="apps-create-actions">
-              <button onClick={handleCreateApp} className="save-button">Guardar</button>
-              <button onClick={() => setIsCreating(false)} className="cancel-button">Cancelar</button>
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h3>Agregar Nueva App</h3>
+              <input
+                type="text"
+                name="name"
+                placeholder="Nombre de la App"
+                value={newApp.name}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                name="description"
+                placeholder="Descripción"
+                value={newApp.description}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                name="version"
+                placeholder="Versión"
+                value={newApp.version}
+                onChange={handleInputChange}
+              />
+              <div className="modal-actions">
+                <button onClick={handleCreateApp} className="save-button">Guardar</button>
+                <button onClick={() => setIsCreating(false)} className="cancel-button">Cancelar</button>
+              </div>
             </div>
           </div>
         )}
