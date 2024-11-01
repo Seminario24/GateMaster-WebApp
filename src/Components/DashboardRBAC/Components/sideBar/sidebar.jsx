@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './sidebar.css';
 
-// Iconos a utilizar
 import UmgLogo from '../../../../Assets/UMGm1.png';
 import User from '../../../../../public/icons/user.png';
 import Settings from '../../../../../public/icons/settings.png';
@@ -13,17 +12,17 @@ import Sesion from '../../../../../public/icons/cerrar-sesion.png';
 function Sidebar() {
   
   const [isExpanded, setIsExpanded] = useState(true);
-  const navigate = useNavigate(); // Hook para redirección
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
   };
 
   const handleLogout = () => {
-    // Eliminar los tokens del localStorage
-    localStorage.removeItem('accessToken'); // Elimina el token de autenticación (ajústalo si tienes otro tipo de token)
+    // Elimina el token de autenticación
+    localStorage.removeItem('accessToken');
 
-    // Redirigir a la URL externa (http://localhost:5173/)
+    // Redirige a la URL de cierre de sesión
     window.location.href = import.meta.env.VITE_APP_ENDPOINT;
   };
 
@@ -37,7 +36,7 @@ function Sidebar() {
       </div>
       <ul className="sidebar-menu">
         <li>
-          <Link to="/" className="sidebar-link">
+          <Link to="/dashboard" className="sidebar-link"> {/* Redirección a /dashboard */}
             <img src={Home} alt="Inicio" className="menu-icon" />
             {isExpanded && <span>Inicio</span>}
           </Link>
