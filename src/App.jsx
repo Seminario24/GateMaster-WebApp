@@ -11,19 +11,20 @@ import Layout from './Components/Layout/Layout';
 import Dashboard from './Components/DashboardRBAC/Dashboard';
 import CrearUsuarios from "./Components/DashboardRBAC/Components/CrearUsuarios/CrearUsuarios";
 import Roles from './Components/DashboardRBAC/Components/Roles/Roles';
-import Usuarios from './Components/DashboardRBAC/Components/Usuarios/Usuarios'; // Componente Usuarios
-import Ajustes from './Components/DashboardRBAC/Components/Ajustes/Ajustes';   // Componente Ajustes
-import Apps from './Components/DashboardRBAC/Components/Apps/apps';         // Componente Apps
+import Usuarios from './Components/DashboardRBAC/Components/Usuarios/Usuarios';
+import Ajustes from './Components/DashboardRBAC/Components/Ajustes/Ajustes';
+import Apps from './Components/DashboardRBAC/Components/Apps/apps';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
+          {/* Ruta pública con Header */}
           <Route 
             path="/" 
             element={
-              <Layout>
+              <Layout showTopNav={true}>
                 <LandingPage />
               </Layout>
             } 
@@ -38,7 +39,7 @@ function App() {
             path="/permisos" 
             element={
               <PrivateRoute>
-                <Layout>
+                <Layout showTopNav={false}>
                   <Permisos />
                 </Layout>
               </PrivateRoute>
@@ -48,7 +49,7 @@ function App() {
             path="/CrearUsuarios"
             element={
               <PrivateRoute>
-                <Layout>
+                <Layout showTopNav={false}>
                   <CrearUsuarios />
                 </Layout>
               </PrivateRoute>
@@ -58,7 +59,7 @@ function App() {
             path="/aplicaciones" 
             element={
               <PrivateRoute>
-                <Layout>
+                <Layout showTopNav={false}>
                   <Aplicaciones />
                 </Layout>
               </PrivateRoute>
@@ -68,7 +69,7 @@ function App() {
             path="/aboutus" 
             element={
               <PrivateRoute>
-                <Layout> 
+                <Layout showTopNav={false}>
                   <AboutUs />
                 </Layout>
               </PrivateRoute>
@@ -78,17 +79,19 @@ function App() {
             path="/dashboard" 
             element={
               <PrivateRoute>
-                <Dashboard />
+                <Layout showTopNav={false}>
+                  <Dashboard />
+                </Layout>
               </PrivateRoute>
             } 
           />
           
-          {/* Rutas protegidas adicionales */}
+          {/* Rutas adicionales protegidas */}
           <Route 
             path="/roles" 
             element={
               <PrivateRoute>
-                <Layout>
+                <Layout showTopNav={false}>
                   <Roles />
                 </Layout>
               </PrivateRoute>
@@ -98,7 +101,7 @@ function App() {
             path="/users" 
             element={
               <PrivateRoute>
-                <Layout>
+                <Layout showTopNav={false}>
                   <Usuarios />
                 </Layout>
               </PrivateRoute>
@@ -108,7 +111,7 @@ function App() {
             path="/settings" 
             element={
               <PrivateRoute>
-                <Layout>
+                <Layout showTopNav={false}>
                   <Ajustes />
                 </Layout>
               </PrivateRoute>
@@ -118,7 +121,7 @@ function App() {
             path="/apps" 
             element={
               <PrivateRoute>
-                <Layout>
+                <Layout showTopNav={false}>
                   <Apps />
                 </Layout>
               </PrivateRoute>
