@@ -36,7 +36,7 @@ const RoleManagement = () => {
 
   return (
     <div className="role-management-container">
-      <Sidebar /> {/* Incluye el Sidebar en el contenedor principal */}
+      <Sidebar /> 
       <div className="role-management-content">
         <header className="header">
           <div className="search-box">
