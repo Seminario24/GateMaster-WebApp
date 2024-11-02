@@ -1,42 +1,96 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './roles.css';
-import Sidebar from '../sideBar/sidebar';  
+import Sidebar from '../sideBar/sidebar';
 import { FaSearch, FaEdit, FaTrashAlt, FaPlus } from 'react-icons/fa';
 
 const RoleManagement = () => {
-  const [roles, setRoles] = useState([
-    { name: 'Admin', description: 'Acceso completo a todos los recursos' },
-    { name: 'Editor', description: 'Puede editar contenido pero no administrar usuarios' },
-    { name: 'Viewer', description: 'Solo puede ver contenido' },
-  ]);
-
+  const [roleId, setRoleId] = useState('');
+  const [roleName, setRoleName] = useState('');
+  const [createdBy, setCreatedBy] = useState(''); 
+  const [roles, setRoles] = useState([]);
+  const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newRole, setNewRole] = useState({ name: '', description: '' });
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewRole((prevRole) => ({ ...prevRole, [name]: value }));
+  // Función para obtener todos los roles
+  const getAllRoles = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      setMessage('Token no encontrado, por favor inicia sesión.');
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_API_URL}/gatemaster/getallroles`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      setRoles(response.data);
+    } catch (error) {
+      console.error('Error al obtener roles:', error);
+      setMessage('Error al obtener roles');
+    }
   };
 
-  const handleAddRole = (e) => {
-    e.preventDefault();
-    setRoles([...roles, newRole]);
-    setNewRole({ name: '', description: '' });
-    setIsModalOpen(false);
+  
+  const createRole = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      setMessage('Token no encontrado, por favor inicia sesión.');
+      return;
+    }
+
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/gatemaster/createrole`,
+        {
+          role_id: roleId || null,
+          name: roleName,
+          active: true,
+          created_by: createdBy, // Cambiado de dcreated_by a created_by
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      setMessage('Rol creado exitosamente');
+      setIsSuccess(true);
+
+      
+      setRoleId('');
+      setRoleName('');
+      setCreatedBy(''); 
+      setIsModalOpen(false);
+
+      getAllRoles();
+
+    } catch (error) {
+      console.error('Error al crear rol:', error);
+      setMessage('Error: ' + (error.response ? error.response.data : error.message));
+      setIsSuccess(false);
+    }
   };
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  useEffect(() => {
+    getAllRoles(); 
+  }, []);
 
-  const filteredRoles = roles.filter((role) =>
-    role.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
+  
   return (
     <div className="role-management-container">
-      <Sidebar /> 
+      <Sidebar />
       <div className="role-management-content">
         <header className="header">
           <div className="search-box">
@@ -45,28 +99,31 @@ const RoleManagement = () => {
               type="text"
               placeholder="Buscar por nombre de rol"
               value={searchTerm}
-              onChange={handleSearchChange}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <button className="add-role-btn" onClick={() => setIsModalOpen(true)}>
             <FaPlus /> Agregar Rol
           </button>
+         
         </header>
 
         <section className="roles-table">
           <table>
             <thead>
               <tr>
+                <th>ID del Rol</th>
                 <th>Nombre del Rol</th>
-                <th>Descripción</th>
+                <th>Creado por</th> 
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              {filteredRoles.map((role, index) => (
-                <tr key={index}>
+              {roles.filter(role => role.name.toLowerCase().includes(searchTerm.toLowerCase())).map((role) => (
+                <tr key={role.role_id}>
+                  <td>{role.role_id || 'Sin ID'}</td>
                   <td>{role.name}</td>
-                  <td>{role.description}</td>
+                  <td>{role.created_by || 'Sin información'}</td> {/* Cambiado de dcreated_by a created_by */}
                   <td>
                     <button className="action-btn edit-btn">
                       <FaEdit /> Editar
@@ -79,7 +136,7 @@ const RoleManagement = () => {
               ))}
             </tbody>
           </table>
-          {filteredRoles.length === 0 && (
+          {roles.filter(role => role.name.toLowerCase().includes(searchTerm.toLowerCase())).length === 0 && (
             <p className="no-results">No se encontraron roles que coincidan con la búsqueda.</p>
           )}
         </section>
@@ -88,23 +145,33 @@ const RoleManagement = () => {
           <div className="modal-overlay">
             <div className="modal-content">
               <h3>Agregar Nuevo Rol</h3>
-              <form onSubmit={handleAddRole}>
+              <form onSubmit={(e) => { e.preventDefault(); createRole(); }}>
+                <div className="form-group">
+                  <label>ID del Rol</label>
+                  <input
+                    type="text"
+                    name="role_id"
+                    value={roleId}
+                    onChange={(e) => setRoleId(e.target.value)}
+                    placeholder="Ingrese ID (opcional)"
+                  />
+                </div>
                 <div className="form-group">
                   <label>Nombre del Rol</label>
                   <input
                     type="text"
                     name="name"
-                    value={newRole.name}
-                    onChange={handleInputChange}
+                    value={roleName}
+                    onChange={(e) => setRoleName(e.target.value)}
                     required
                   />
                 </div>
                 <div className="form-group">
-                  <label>Descripción</label>
+                  <label>Creado por</label> 
                   <textarea
-                    name="description"
-                    value={newRole.description}
-                    onChange={handleInputChange}
+                    name="created_by" 
+                    value={createdBy} 
+                    onChange={(e) => setCreatedBy(e.target.value)} 
                     required
                   ></textarea>
                 </div>

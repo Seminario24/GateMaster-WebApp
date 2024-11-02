@@ -1,4 +1,4 @@
-// src/Components/Layout/Layout.jsx
+
 import PropTypes from 'prop-types'; 
 import { useLocation } from 'react-router-dom'; 
 import Header from '../HomePage/Header/Header'; 
